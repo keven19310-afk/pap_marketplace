@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Marketplace Local</title>
+</head>
+<body>
+    <h1>Bem-vindo ao Marketplace Local!</h1>
+    <hr>
+    <h2>Produtos Disponíveis</h2>
+    
+    {% if produtos %}
+        <ul>
+        {% for produto in produtos %}
+            <li><strong>{{ produto.nome }}</strong> - {{ produto.preco }}€</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Ainda não há produtos registados.</p>
+    {% endif %}
+</body>
+</html>python manage.py runserver
