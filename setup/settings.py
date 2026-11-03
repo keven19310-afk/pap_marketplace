@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +41,49 @@ INSTALLED_APPS = [
     'marketplace',
 ]
 
+# Configuração de branding estilo Mercado Livre
+JAZZMIN_SETTINGS = {
+    "site_title": "Segunda Vida Admin",
+    "site_header": "Segunda Vida",
+    "site_brand": "SEGUNDA VIDA",
+    "welcome_sign": "Painel de Gestão - Segunda Vida",
+    "copyright": "Keven - Projeto PAP Segunda Vida",
+
+    # Ícones FontAwesome inspirados no Mercado Livre
+    "icons": {
+        "auth.Group": "fas fa-users-cog",
+        "auth.User": "fas fa-user-circle",
+        "marketplace.Produtos": "fas fa-shopping-bag",
+        "marketplace.Users": "fas fa-id-card",
+    },
+
+    "topmenu_links": [
+        {"name": "Ir para a Loja", "url": "/", "permissions": ["auth.view_user"]},
+    ],
+
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "show_ui_builder": True,
+}
+
+# Cores inspiradas na paleta do Mercado Livre (Amarelo, Azul e Cinza)
+JAZZMIN_UI_TWEAKS = {
+    "navbar": "navbar-warning navbar-light",  # Barra superior Amarela (marca registada)
+    "theme": "flatly",                        # Design limpo e moderno
+    "sidebar": "sidebar-dark-warning",        # Menu lateral escuro com foco em amarelo
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": True,
+    "accent": "accent-warning",               # Botões e destaques em tons amarelados/dourados
+    "button_classes": {
+        "primary": "btn-warning",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
