@@ -11,51 +11,49 @@
     
     <style>
         body {
-            background-color: #ededed;
+            background-color: #f5ebd9; /* Bege suave de fundo geral */
             font-family: Arial, sans-serif;
+            color: #0d0c08;
         }
-        /* Topo Amarelo Estilo Mercado Livre */
+        /* Topo Principal com fundo azul e detalhes em preto/branco */
         .ml-header {
-            background-color: #fff159;
-            padding: 10px 0 5px 0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            background-color: #043f77; /* Azul pedido para o cabeçalho */
+            padding: 18px 0 14px 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            border-bottom: 2px solid #0d0c08;
         }
         .ml-logo {
             font-weight: 800;
             font-size: 22px;
-            color: #2d3277;
+            color: #ffffff; /* Branco para destacar no fundo azul */
             text-decoration: none;
         }
         .ml-search-input {
             border: none;
-            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
-            border-radius: 2px 0 0 2px;
-            padding: 8px 15px;
+            border-radius: 6px 0 0 6px;
+            padding: 9px 15px;
+            background-color: #ffffff;
+        }
+        .ml-search-input:focus {
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(13, 12, 8, 0.2);
         }
         .ml-search-btn {
-            background-color: #ffffff;
+            background-color: #0d0c08; /* Preto nos botões de pesquisa */
             border: none;
-            color: #666;
-            border-left: 1px solid #e6e6e6;
-            border-radius: 0 2px 2px 0;
-            padding: 0 15px;
+            color: #ffffff;
+            border-radius: 0 6px 6px 0;
+            padding: 0 20px;
+            transition: background-color 0.2s;
         }
-        /* Menu Secundário */
-        .sub-nav {
-            font-size: 14px;
-            color: #333;
+        .ml-search-btn:hover {
+            background-color: #222;
+            color: #ffffff;
         }
-        .sub-nav a {
-            color: rgba(0,0,0,0.7);
-            text-decoration: none;
-            margin-right: 15px;
-        }
-        .sub-nav a:hover {
-            color: #000;
-        }
-        /* Categorias com Ícones */
+        /* Categorias com Bege mais escuro e Hover Azul */
         .cat-card {
-            background: #fff;
+            background: #e6d8c3; /* Bege mais escuro pedido */
+            border: 1px solid #d4c4ac;
             border-radius: 50%;
             width: 60px;
             height: 60px;
@@ -64,24 +62,26 @@
             justify-content: center;
             margin: 0 auto 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-            color: #2d3277;
+            color: #0d0c08; /* Ícone em preto */
             font-size: 20px;
-            transition: transform 0.2s;
+            transition: transform 0.2s, background-color 0.2s, color 0.2s;
         }
         .cat-card:hover {
-            transform: scale(1.1);
+            transform: translateY(-3px);
+            background-color: #043f77; /* Fica azul ao passar o rato */
+            color: #ffffff; /* Ícone fica branco ao passar o rato */
         }
         /* Cartões de Produtos */
         .card-produto {
-            border: none;
-            border-radius: 6px;
+            border: 1px solid #d4c4ac;
+            border-radius: 8px;
             transition: transform 0.2s, box-shadow 0.2s;
             background: #fff;
             overflow: hidden;
         }
         .card-produto:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 20px rgba(13, 12, 8, 0.15);
         }
         .card-img-container {
             height: 180px;
@@ -89,7 +89,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background-color: #f8f9fa;
+            background-color: #faf6ef;
         }
         .card-img-container img {
             max-height: 100%;
@@ -97,11 +97,11 @@
         }
         .preco-destaque {
             font-size: 22px;
-            font-weight: bold;
-            color: #333;
+            font-weight: 800;
+            color: #0d0c08;
         }
         .frete-gratis {
-            color: #00a650;
+            color: #043f77;
             font-size: 13px;
             font-weight: 600;
         }
@@ -109,37 +109,37 @@
 </head>
 <body>
 
-    <!-- Header Amarelo Estilo Mercado Livre -->
+    <!-- Header Principal -->
     <header class="ml-header sticky-top">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-3">
                     <a href="/" class="ml-logo">
-                        <i class="fas fa-recycle"></i> SEGUNDA VIDA
+                        <i class="fas fa-recycle text-warning"></i> SEGUNDA VIDA
                     </a>
                 </div>
                 <div class="col-md-6">
                     <form class="d-flex" action="#" method="GET">
-                        <input class="form-control ml-search-input" type="search" placeholder="Buscar produtos em segunda mão, marcas e mais..." aria-label="Search">
+                        <input class="form-control ml-search-input" type="search" placeholder="O que estás a procurar hoje?" aria-label="Search">
                         <button class="btn ml-search-btn" type="submit">
                             <i class="fas fa-search"></i>
                         </button>
                     </form>
                 </div>
                 <div class="col-md-3 text-end">
-                    <a href="/admin" class="btn btn-dark btn-sm me-2"><i class="fas fa-user-shield me-1"></i> Admin</a>
-                    <a href="#" class="text-dark me-3"><i class="fas fa-shopping-cart fs-5"></i></a>
+                    <a href="/admin" class="btn btn-dark btn-sm me-2 fw-semibold" style="background-color: #0d0c08; border: none;"><i class="fas fa-user-shield me-1"></i> Admin</a>
+                    <a href="#" class="text-white me-3"><i class="fas fa-shopping-cart fs-5"></i></a>
                 </div>
             </div>
             
             <!-- Sub-menu de Navegação -->
-            <div class="row mt-2 sub-nav d-none d-md-flex">
+            <div class="row mt-4 pt-2 border-top border-light-subtle d-none d-md-flex">
                 <div class="col-12">
-                    <a href="#"><i class="fas fa-list me-1"></i> Categorias</a>
-                    <a href="#">Ofertas da Semana</a>
-                    <a href="#">Vender Artigo</a>
-                    <a href="#">Como Funciona</a>
-                    <a href="#">Contacto</a>
+                    <a href="#" class="fw-bold text-decoration-none me-4 text-white"><i class="fas fa-bars me-1 text-warning"></i> Categorias</a>
+                    <a href="#" class="fw-bold text-decoration-none me-4 text-white-50">Ofertas da Semana</a>
+                    <a href="#" class="fw-bold text-decoration-none me-4 text-white-50">Vender Artigo</a>
+                    <a href="#" class="fw-bold text-decoration-none me-4 text-white-50">Como Funciona</a>
+                    <a href="#" class="fw-bold text-decoration-none me-4 text-white-50">Contacto</a>
                 </div>
             </div>
         </div>
@@ -147,14 +147,14 @@
 
     <!-- Banner Principal -->
     <div class="container mt-4">
-        <div class="p-4 text-white rounded-3 shadow-sm" style="background: linear-gradient(90deg, #2d3277 0%, #3483fa 100%);">
+        <div class="p-4 text-white rounded-3 shadow-sm" style="background: linear-gradient(135deg, #0d0c08 0%, #043f77 100%);">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <h2>Dá uma Segunda Vida aos teus artigos!</h2>
-                    <p class="mb-0">Compre e venda produtos em segunda mão com rapidez e segurança na PAP Keven.</p>
+                    <h2 class="fw-bold">Dá uma Segunda Vida aos teus artigos!</h2>
+                    <p class="text-white-50 mb-0">Compra e vende produtos em segunda mão com rapidez e segurança na PAP Keven.</p>
                 </div>
                 <div class="col-md-4 text-end d-none d-md-block">
-                    <a href="#" class="btn btn-warning fw-bold px-4 py-2">Anunciar Grátis</a>
+                    <a href="#" class="btn btn-light fw-bold px-4 py-2 shadow-sm" style="color: #043f77;">Anunciar Grátis</a>
                 </div>
             </div>
         </div>
@@ -165,34 +165,34 @@
         <div class="row text-center">
             <div class="col-3 col-md-2">
                 <div class="cat-card"><i class="fas fa-mobile-alt"></i></div>
-                <small class="fw-semibold text-secondary">Tecnologia</small>
+                <small class="fw-semibold" style="color: #0d0c08;">Tecnologia</small>
             </div>
             <div class="col-3 col-md-2">
                 <div class="cat-card"><i class="fas fa-tshirt"></i></div>
-                <small class="fw-semibold text-secondary">Moda</small>
+                <small class="fw-semibold" style="color: #0d0c08;">Moda</small>
             </div>
             <div class="col-3 col-md-2">
                 <div class="cat-card"><i class="fas fa-couch"></i></div>
-                <small class="fw-semibold text-secondary">Casa</small>
+                <small class="fw-semibold" style="color: #0d0c08;">Casa</small>
             </div>
             <div class="col-3 col-md-2">
                 <div class="cat-card"><i class="fas fa-football-ball"></i></div>
-                <small class="fw-semibold text-secondary">Desporto</small>
+                <small class="fw-semibold" style="color: #0d0c08;">Desporto</small>
             </div>
             <div class="col-3 col-md-2 d-none d-md-block">
                 <div class="cat-card"><i class="fas fa-gamepad"></i></div>
-                <small class="fw-semibold text-secondary">Gaming</small>
+                <small class="fw-semibold" style="color: #0d0c08;">Gaming</small>
             </div>
             <div class="col-3 col-md-2 d-none d-md-block">
                 <div class="cat-card"><i class="fas fa-book"></i></div>
-                <small class="fw-semibold text-secondary">Livros</small>
+                <small class="fw-semibold" style="color: #0d0c08;">Livros</small>
             </div>
         </div>
     </div>
 
     <!-- Grelha de Produtos Fictícios para Demonstração -->
     <div class="container mt-4 mb-5">
-        <h4 class="mb-3 text-secondary fw-bold">Produtos em Destaque</h4>
+        <h4 class="mb-3 fw-bold" style="color: #0d0c08;">Produtos em Destaque</h4>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
             
             <!-- Produto 1 -->
@@ -202,4 +202,15 @@
                         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" class="w-100" alt="Sapatilhas">
                     </div>
                     <div class="card-body px-2 pb-0">
-                        <p class="frete-gratis mb-1"><i class
+                        <p class="frete-gratis mb-1"><i class="fas fa-shipping-fast me-1"></i> Portes grátis</p>
+                        <h5 class="card-title fs-6 text-dark mb-1">Ténis Nike Vermelhos</h5>
+                        <p class="preco-destaque mb-2">49,99 €</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
