@@ -1,8 +1,7 @@
-from django.contrib import admin
 from django.urls import path
-from marketplace.views import home
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', home, name='home'),
+    path('', views.lista_produtos, name='lista_produtos'),
+    path('criar/', views.criar_produto, name='criar_produto'),
 ]

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Produto, PropostaTroca, PedidoProcura
-from .forms import ProdutoForm, PropostaTrocaForm
+from .forms import ProdutoForm, PropostaTrocaForm, PedidoProcuraForm
 
 # 1. Página Inicial / Catálogo
 def lista_produtos(request):

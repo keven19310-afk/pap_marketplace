@@ -23,3 +23,14 @@ class PropostaTrocaForm(forms.ModelForm):
             'produto_oferecido': forms.Select(attrs={'class': 'w-full p-3 border rounded-xl'}),
             'valor_ajuste': forms.NumberInput(attrs={'class': 'w-full p-3 border rounded-xl', 'step': '0.01'}),
         }
+
+# Formulário para Criar Pedido no Mural "Procuro..."
+class PedidoProcuraForm(forms.ModelForm):
+    class Meta:
+        model = PedidoProcura
+        fields = ['titulo_procurado', 'descricao', 'orcamento_maximo']
+        widgets = {
+            'titulo_procurado': forms.TextInput(attrs={'class': 'w-full p-3 border rounded-xl', 'placeholder': 'Ex: Manual de Matemática 12º Ano'}),
+            'descricao': forms.Textarea(attrs={'class': 'w-full p-3 border rounded-xl', 'rows': 3}),
+            'orcamento_maximo': forms.NumberInput(attrs={'class': 'w-full p-3 border rounded-xl', 'step': '0.01'}),
+        }
