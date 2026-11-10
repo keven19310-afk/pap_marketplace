@@ -11,77 +11,107 @@
     
     <style>
         body {
-            background-color: #f5ebd9; /* Bege suave de fundo geral */
+            background-color: #0d0c08; /* Fundo escuro para realçar o efeito vidro */
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(4, 63, 119, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 85% 60%, rgba(230, 216, 195, 0.15) 0%, transparent 40%);
+            background-attachment: fixed;
             font-family: Arial, sans-serif;
-            color: #0d0c08;
+            color: #ffffff;
+            min-height: 100vh;
         }
-        /* Topo Principal com fundo azul e detalhes em preto/branco */
+
+        /* Topo Principal com Efeito Glassmorphism */
         .ml-header {
-            background-color: #043f77; /* Azul pedido para o cabeçalho */
+            background: rgba(4, 63, 119, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             padding: 18px 0 14px 0;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-            border-bottom: 2px solid #0d0c08;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         }
         .ml-logo {
             font-weight: 800;
             font-size: 22px;
-            color: #ffffff; /* Branco para destacar no fundo azul */
+            color: #ffffff;
             text-decoration: none;
         }
         .ml-search-input {
-            border: none;
-            border-radius: 6px 0 0 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px 0 0 8px;
             padding: 9px 15px;
-            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #0d0c08;
         }
         .ml-search-input:focus {
-            background-color: #fff;
-            box-shadow: 0 0 0 3px rgba(13, 12, 8, 0.2);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(4, 63, 119, 0.4);
         }
         .ml-search-btn {
-            background-color: #0d0c08; /* Preto nos botões de pesquisa */
-            border: none;
+            background-color: #0d0c08;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-left: none;
             color: #ffffff;
-            border-radius: 0 6px 6px 0;
+            border-radius: 0 8px 8px 0;
             padding: 0 20px;
             transition: background-color 0.2s;
         }
         .ml-search-btn:hover {
-            background-color: #222;
+            background-color: #1a1a1a;
             color: #ffffff;
         }
-        /* Categorias com Bege mais escuro e Hover Azul */
+
+        /* Banner Vidro */
+        .glass-banner {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* Categorias Glassmorphism */
         .cat-card {
-            background: #e6d8c3; /* Bege mais escuro pedido */
-            border: 1px solid #d4c4ac;
+            background: rgba(230, 216, 195, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-            color: #0d0c08; /* Ícone em preto */
-            font-size: 20px;
-            transition: transform 0.2s, background-color 0.2s, color 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            color: #f5ebd9;
+            font-size: 22px;
+            transition: all 0.3s ease;
         }
         .cat-card:hover {
-            transform: translateY(-3px);
-            background-color: #043f77; /* Fica azul ao passar o rato */
-            color: #ffffff; /* Ícone fica branco ao passar o rato */
+            transform: translateY(-5px) scale(1.05);
+            background: rgba(4, 63, 119, 0.8);
+            border-color: rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+            box-shadow: 0 8px 25px rgba(4, 63, 119, 0.5);
         }
-        /* Cartões de Produtos */
+
+        /* Cartões de Produtos em Vidro (Glassmorphism) */
         .card-produto {
-            border: 1px solid #d4c4ac;
-            border-radius: 8px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            background: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
             overflow: hidden;
         }
         .card-produto:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 20px rgba(13, 12, 8, 0.15);
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.14);
+            border-color: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 12px 40px 0 rgba(4, 63, 119, 0.4);
         }
         .card-img-container {
             height: 180px;
@@ -89,7 +119,8 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background-color: #faf6ef;
+            background-color: #ffffff;
+            border-radius: 12px;
         }
         .card-img-container img {
             max-height: 100%;
@@ -98,12 +129,33 @@
         .preco-destaque {
             font-size: 22px;
             font-weight: 800;
-            color: #0d0c08;
+            color: #ffffff;
         }
         .frete-gratis {
-            color: #043f77;
+            color: #64b5f6;
             font-size: 13px;
             font-weight: 600;
+        }
+        .btn-glass {
+            background: rgba(4, 63, 119, 0.8);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            transition: all 0.2s ease;
+        }
+        .btn-glass:hover {
+            background: rgba(4, 63, 119, 1);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(4, 63, 119, 0.6);
+        }
+
+        /* Rodapé */
+        footer {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e6d8c3;
         }
     </style>
 </head>
@@ -127,13 +179,13 @@
                     </form>
                 </div>
                 <div class="col-md-3 text-end">
-                    <a href="/admin" class="btn btn-dark btn-sm me-2 fw-semibold" style="background-color: #0d0c08; border: none;"><i class="fas fa-user-shield me-1"></i> Admin</a>
+                    <a href="/admin" class="btn btn-dark btn-sm me-2 fw-semibold" style="background-color: rgba(13, 12, 8, 0.8); border: 1px solid rgba(255,255,255,0.2);"><i class="fas fa-user-shield me-1"></i> Admin</a>
                     <a href="#" class="text-white me-3"><i class="fas fa-shopping-cart fs-5"></i></a>
                 </div>
             </div>
             
             <!-- Sub-menu de Navegação -->
-            <div class="row mt-4 pt-2 border-top border-light-subtle d-none d-md-flex">
+            <div class="row mt-3 pt-2 border-top border-white-50 d-none d-md-flex">
                 <div class="col-12">
                     <a href="#" class="fw-bold text-decoration-none me-4 text-white"><i class="fas fa-bars me-1 text-warning"></i> Categorias</a>
                     <a href="#" class="fw-bold text-decoration-none me-4 text-white-50">Ofertas da Semana</a>
@@ -147,14 +199,14 @@
 
     <!-- Banner Principal -->
     <div class="container mt-4">
-        <div class="p-4 text-white rounded-3 shadow-sm" style="background: linear-gradient(135deg, #0d0c08 0%, #043f77 100%);">
+        <div class="p-4 text-white rounded-4 glass-banner">
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <h2 class="fw-bold">Dá uma Segunda Vida aos teus artigos!</h2>
                     <p class="text-white-50 mb-0">Compra e vende produtos em segunda mão com rapidez e segurança na PAP Keven.</p>
                 </div>
                 <div class="col-md-4 text-end d-none d-md-block">
-                    <a href="#" class="btn btn-light fw-bold px-4 py-2 shadow-sm" style="color: #043f77;">Anunciar Grátis</a>
+                    <a href="#" class="btn btn-light fw-bold px-4 py-2 shadow-sm" style="color: #043f77; border-radius: 8px;">Anunciar Grátis</a>
                 </div>
             </div>
         </div>
@@ -165,52 +217,106 @@
         <div class="row text-center">
             <div class="col-3 col-md-2">
                 <div class="cat-card"><i class="fas fa-mobile-alt"></i></div>
-                <small class="fw-semibold" style="color: #0d0c08;">Tecnologia</small>
+                <small class="fw-semibold text-white-50">Tecnologia</small>
             </div>
             <div class="col-3 col-md-2">
                 <div class="cat-card"><i class="fas fa-tshirt"></i></div>
-                <small class="fw-semibold" style="color: #0d0c08;">Moda</small>
+                <small class="fw-semibold text-white-50">Moda</small>
             </div>
             <div class="col-3 col-md-2">
                 <div class="cat-card"><i class="fas fa-couch"></i></div>
-                <small class="fw-semibold" style="color: #0d0c08;">Casa</small>
+                <small class="fw-semibold text-white-50">Casa</small>
             </div>
             <div class="col-3 col-md-2">
                 <div class="cat-card"><i class="fas fa-football-ball"></i></div>
-                <small class="fw-semibold" style="color: #0d0c08;">Desporto</small>
+                <small class="fw-semibold text-white-50">Desporto</small>
             </div>
             <div class="col-3 col-md-2 d-none d-md-block">
                 <div class="cat-card"><i class="fas fa-gamepad"></i></div>
-                <small class="fw-semibold" style="color: #0d0c08;">Gaming</small>
+                <small class="fw-semibold text-white-50">Gaming</small>
             </div>
             <div class="col-3 col-md-2 d-none d-md-block">
                 <div class="cat-card"><i class="fas fa-book"></i></div>
-                <small class="fw-semibold" style="color: #0d0c08;">Livros</small>
+                <small class="fw-semibold text-white-50">Livros</small>
             </div>
         </div>
     </div>
 
-    <!-- Grelha de Produtos Fictícios para Demonstração -->
+    <!-- Grelha de Produtos (Cards Glassmorphism) -->
     <div class="container mt-4 mb-5">
-        <h4 class="mb-3 fw-bold" style="color: #0d0c08;">Produtos em Destaque</h4>
+        <h4 class="mb-3 fw-bold text-white">Produtos em Destaque</h4>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
             
             <!-- Produto 1 -->
             <div class="col">
                 <div class="card h-100 card-produto p-2">
-                    <div class="card-img-container rounded">
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" class="w-100" alt="Sapatilhas">
+                    <div class="card-img-container">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" class="w-100" alt="Ténis Nike">
                     </div>
                     <div class="card-body px-2 pb-0">
                         <p class="frete-gratis mb-1"><i class="fas fa-shipping-fast me-1"></i> Portes grátis</p>
-                        <h5 class="card-title fs-6 text-dark mb-1">Ténis Nike Vermelhos</h5>
+                        <h5 class="card-title fs-6 text-white mb-1">Ténis Nike Red (Usado)</h5>
                         <p class="preco-destaque mb-2">49,99 €</p>
+                        <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 2 -->
+            <div class="col">
+                <div class="card h-100 card-produto p-2">
+                    <div class="card-img-container">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400" class="w-100" alt="Headphones">
+                    </div>
+                    <div class="card-body px-2 pb-0">
+                        <p class="frete-gratis mb-1"><i class="fas fa-shipping-fast me-1"></i> Envio Imediato</p>
+                        <h5 class="card-title fs-6 text-white mb-1">Auscultadores Bluetooth</h5>
+                        <p class="preco-destaque mb-2">29,90 €</p>
+                        <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 3 -->
+            <div class="col">
+                <div class="card h-100 card-produto p-2">
+                    <div class="card-img-container">
+                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400" class="w-100" alt="Relógio">
+                    </div>
+                    <div class="card-body px-2 pb-0">
+                        <p class="frete-gratis mb-1"><i class="fas fa-shipping-fast me-1"></i> Portes grátis</p>
+                        <h5 class="card-title fs-6 text-white mb-1">Smartwatch Elegante</h5>
+                        <p class="preco-destaque mb-2">75,00 €</p>
+                        <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 4 (Comando PS5 DualSense - Foto Unsplash garantida) -->
+            <div class="col">
+                <div class="card h-100 card-produto p-2">
+                    <div class="card-img-container">
+                        <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=400" class="w-100" alt="Comando DualSense PS5">
+                    </div>
+                    <div class="card-body px-2 pb-0">
+                        <p class="frete-gratis mb-1"><i class="fas fa-shipping-fast me-1"></i> Envio Imediato</p>
+                        <h5 class="card-title fs-6 text-white mb-1">Comando DualSense PS5</h5>
+                        <p class="preco-destaque mb-2">39,99 €</p>
+                        <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
+
+    <!-- Rodapé -->
+    <footer class="py-4 mt-5 text-center">
+        <div class="container">
+            <p class="mb-1 fw-bold" style="color: #e6d8c3;">SEGUNDA VIDA — Marketplace de Segunda Mão</p>
+            <small class="text-white-50">Projeto de Aptidão Profissional (PAP) desenvolvido por Keven.</small>
+        </div>
+    </footer>
 
 </body>
 </html>
