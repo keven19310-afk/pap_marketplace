@@ -11,11 +11,10 @@ def lista_produtos(request):
 # 2. Criar Novo Anúncio (Sem exigir Login + Upload de Imagens)
 def criar_produto(request):
     if request.method == 'POST':
-        form = ProdutoForm(request.POST, request.FILES)  # request.FILES adicionado para carregar imagens
+        form = ProdutoForm(request.POST, request.FILES)
         if form.is_valid():
             produto = form.save(commit=False)
             
-            # Pega o primeiro utilizador que existir ou cria um temporário
             User = get_user_model()
             usuario_padrao = User.objects.first()
             if not usuario_padrao:
@@ -27,3 +26,28 @@ def criar_produto(request):
     else:
         form = ProdutoForm()
     return render(request, 'criar_produto.html', {'form': form})
+
+# 3. Ver Detalhes do Produto
+def detalhe_produto(request, id):
+    produto = get_object_or_404(Produto, id=id)
+    return render(request, 'detalhe_produto.html', {'produto': produto})
+
+# 4. Editar Produto (Alterar foto, preço, título, etc.)
+def editar_produto(request, id):
+    produto = get_object_or_404(Produto, id=id)
+    if request.method == 'POST':
+        form = ProdutoForm(request.POST, request.FILES, instance=produto)
+        if form.is_valid():
+            form.save()
+            return redirect('detalhe_produto', id=produto.id)
+    else:
+        form = ProdutoForm(instance=produto)
+    return render(request, 'editar_produto.html', {'form': form, 'produto': produto})
+
+# 5. Apagar Produto
+def apagar_produto(request, id):
+    produto = get_object_or_404(Produto, id=id)
+    if request.method == 'POST':
+        produto.delete()
+        return redirect('lista_produtos')
+    return redirect('detalhe_produto', id=produto.id)

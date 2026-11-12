@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar {{ produto.titulo }} - Segunda Vida</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #0d0c08;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(4, 63, 119, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 85% 60%, rgba(230, 216, 195, 0.15) 0%, transparent 40%);
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+        .form-control, .form-select {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #0d0c08;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="fw-bold text-white mb-0"><i class="fas fa-edit text-warning me-2"></i> Editar Anúncio</h2>
+                    <a href="{% url 'detalhe_produto' produto.id %}" class="btn btn-outline-light btn-sm"><i class="fas fa-arrow-left me-1"></i> Cancelar</a>
+                </div>
+
+                <div class="glass-card p-4">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Nome do Produto *</label>
+                            {{ form.titulo }}
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Categoria *</label>
+                                {{ form.categoria }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Estado de Conservação *</label>
+                                {{ form.estado_conservacao }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Preço (€) *</label>
+                                {{ form.preco }}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Quantidade *</label>
+                                {{ form.quantidade }}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Localização (Cidade) *</label>
+                                {{ form.localizacao }}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Alterar Foto do Produto</label>
+                            {{ form.imagem }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Descrição</label>
+                            {{ form.descricao }}
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check form-switch mb-2">
+                                {{ form.aceita_troca }}
+                                <label class="form-check-label fw-bold" for="id_aceita_troca">Aceita Troca por outro produto?</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">O que aceita como troca?</label>
+                            {{ form.preferencias_troca }}
+                        </div>
+
+                        <button type="submit" class="btn btn-warning w-100 py-3 fw-bold fs-5 shadow">
+                            <i class="fas fa-save me-2"></i> Guardar Alterações
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

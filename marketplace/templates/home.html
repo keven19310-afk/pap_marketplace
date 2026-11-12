@@ -316,7 +316,7 @@
                             </div>
                             <div>
                                 <p class="preco-destaque mb-2">{{ produto.preco }} €</p>
-                                <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
+                                <a href="{% url 'detalhe_produto' produto.id %}" class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</a>
                             </div>
                         </div>
                     </div>
