@@ -161,7 +161,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-3">
-                    <a href="{% url 'lista_produtos' %}" class="ml-logo">
+                    <a href="#" class="ml-logo">
                         <i class="fas fa-recycle text-warning"></i> SEGUNDA VIDA
                     </a>
                 </div>
@@ -174,7 +174,7 @@
                     </form>
                 </div>
                 <div class="col-md-3 text-end">
-                    <a href="/admin" class="btn btn-dark btn-sm me-2 fw-semibold" style="background-color: rgba(13, 12, 8, 0.8); border: 1px solid rgba(255,255,255,0.2);"><i class="fas fa-user-shield me-1"></i> Admin</a>
+                    <a href="#" class="btn btn-dark btn-sm me-2 fw-semibold" style="background-color: rgba(13, 12, 8, 0.8); border: 1px solid rgba(255,255,255,0.2);"><i class="fas fa-user-shield me-1"></i> Admin</a>
                     <a href="#" class="text-white me-3"><i class="fas fa-shopping-cart fs-5"></i></a>
                 </div>
             </div>
@@ -184,7 +184,7 @@
                 <div class="col-12">
                     <a href="#" class="fw-bold text-decoration-none me-4 text-white"><i class="fas fa-bars me-1 text-warning"></i> Categorias</a>
                     <a href="#" class="fw-bold text-decoration-none me-4 text-white-50">Ofertas da Semana</a>
-                    <a href="{% url 'criar_produto' %}" class="fw-bold text-decoration-none me-4 text-warning"><i class="fas fa-plus-circle me-1"></i> Vender Artigo</a>
+                    <a href="#" class="fw-bold text-decoration-none me-4 text-warning"><i class="fas fa-plus-circle me-1"></i> Vender Artigo</a>
                     <a href="#" class="fw-bold text-decoration-none me-4 text-white-50">Como Funciona</a>
                     <a href="#" class="fw-bold text-decoration-none me-4 text-white-50">Contacto</a>
                 </div>
@@ -201,7 +201,7 @@
                     <p class="text-white-50 mb-0">Compra e vende produtos em segunda mão com rapidez e segurança na PAP Keven.</p>
                 </div>
                 <div class="col-md-4 text-end d-none d-md-block">
-                    <a href="{% url 'criar_produto' %}" class="btn btn-light fw-bold px-4 py-2 shadow-sm" style="color: #043f77; border-radius: 8px;">Anunciar Grátis</a>
+                    <a href="#" class="btn btn-light fw-bold px-4 py-2 shadow-sm" style="color: #043f77; border-radius: 8px;">Anunciar Grátis</a>
                 </div>
             </div>
         </div>
@@ -237,44 +237,82 @@
         </div>
     </div>
 
-    <!-- Grelha de Produtos Dinâmica da BD -->
+    <!-- Grelha de Produtos -->
     <div class="container mt-4 mb-5">
         <h4 class="mb-3 fw-bold text-white">Produtos em Destaque</h4>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
             
-            {% for produto in produtos %}
+            <!-- Produto 1 -->
             <div class="col">
                 <div class="card h-100 card-produto p-2">
                     <div class="card-img-container">
-                        {% if produto.imagem %}
-                            <img src="{{ produto.imagem.url }}" class="w-100" alt="{{ produto.titulo }}">
-                        {% else %}
-                            <div class="text-dark text-center">
-                                <i class="fas fa-image fa-3x text-muted mb-2"></i>
-                                <br><small class="text-muted">Sem Imagem</small>
-                            </div>
-                        {% endif %}
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" class="w-100" alt="Ténis Nike">
                     </div>
                     <div class="card-body px-2 pb-0">
-                        <p class="frete-gratis mb-1">
-                            <i class="fas fa-map-marker-alt me-1"></i> {{ produto.localizacao|default:"Portugal" }}
-                        </p>
-                        <h5 class="card-title fs-6 text-white mb-1">{{ produto.titulo }}</h5>
+                        <p class="frete-gratis mb-1"><i class="fas fa-map-marker-alt me-1"></i> Lisboa</p>
+                        <h5 class="card-title fs-6 text-white mb-1">Ténis Nike Red (Usado)</h5>
                         <p class="text-white-50 mb-1" style="font-size: 12px;">
-                            <span class="badge bg-secondary">{{ produto.get_estado_conservacao_display }}</span> 
-                            Qtd: {{ produto.quantidade|default:1 }}
+                            <span class="badge bg-secondary">Como Novo</span> Qtd: 1
                         </p>
-                        <p class="preco-destaque mb-2">{{ produto.preco }} €</p>
+                        <p class="preco-destaque mb-2">49,99 €</p>
                         <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
                     </div>
                 </div>
             </div>
-            {% empty %}
-            <div class="col-12 text-center py-5">
-                <p class="text-white-50 fs-5 mb-3">Ainda não há produtos anunciados no marketplace.</p>
-                <a href="{% url 'criar_produto' %}" class="btn btn-warning fw-bold px-4 py-2">Publicar o Primeiro Artigo</a>
+
+            <!-- Produto 2 -->
+            <div class="col">
+                <div class="card h-100 card-produto p-2">
+                    <div class="card-img-container">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400" class="w-100" alt="Headphones">
+                    </div>
+                    <div class="card-body px-2 pb-0">
+                        <p class="frete-gratis mb-1"><i class="fas fa-map-marker-alt me-1"></i> Porto</p>
+                        <h5 class="card-title fs-6 text-white mb-1">Auscultadores Bluetooth</h5>
+                        <p class="text-white-50 mb-1" style="font-size: 12px;">
+                            <span class="badge bg-secondary">Bom Estado</span> Qtd: 1
+                        </p>
+                        <p class="preco-destaque mb-2">29,90 €</p>
+                        <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
+                    </div>
+                </div>
             </div>
-            {% endfor %}
+
+            <!-- Produto 3 -->
+            <div class="col">
+                <div class="card h-100 card-produto p-2">
+                    <div class="card-img-container">
+                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400" class="w-100" alt="Relógio">
+                    </div>
+                    <div class="card-body px-2 pb-0">
+                        <p class="frete-gratis mb-1"><i class="fas fa-map-marker-alt me-1"></i> Coimbra</p>
+                        <h5 class="card-title fs-6 text-white mb-1">Smartwatch Elegante</h5>
+                        <p class="text-white-50 mb-1" style="font-size: 12px;">
+                            <span class="badge bg-secondary">Como Novo</span> Qtd: 1
+                        </p>
+                        <p class="preco-destaque mb-2">75,00 €</p>
+                        <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 4 -->
+            <div class="col">
+                <div class="card h-100 card-produto p-2">
+                    <div class="card-img-container">
+                        <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=400" class="w-100" alt="Comando DualSense PS5">
+                    </div>
+                    <div class="card-body px-2 pb-0">
+                        <p class="frete-gratis mb-1"><i class="fas fa-map-marker-alt me-1"></i> Braga</p>
+                        <h5 class="card-title fs-6 text-white mb-1">Comando DualSense PS5</h5>
+                        <p class="text-white-50 mb-1" style="font-size: 12px;">
+                            <span class="badge bg-secondary">Usado</span> Qtd: 1
+                        </p>
+                        <p class="preco-destaque mb-2">39,99 €</p>
+                        <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
