@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Segunda Vida - O teu Marketplace</title>
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
         body {
             background-color: #0d0c08;
@@ -18,301 +15,383 @@
             background-attachment: fixed;
             font-family: Arial, sans-serif;
             color: #ffffff;
-            min-height: 100vh;
         }
-
+        /* Barra Superior em Azul Navy #043f77 */
         .ml-header {
-            background: rgba(4, 63, 119, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 18px 0 14px 0;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            background-color: #043f77;
+            padding: 12px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
         .ml-logo {
-            font-weight: 800;
-            font-size: 22px;
-            color: #ffffff;
+            font-weight: 900;
+            font-size: 24px;
+            color: #f5ebd9;
             text-decoration: none;
+            letter-spacing: -0.5px;
         }
-        .ml-search-input {
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px 0 0 8px;
-            padding: 9px 15px;
-            background-color: rgba(255, 255, 255, 0.9);
+        .ml-logo:hover {
+            color: #e6d8c3;
+        }
+        .search-bar {
+            border-radius: 4px 0 0 4px;
+            border: none;
+            padding: 10px 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            background-color: #ffffff;
             color: #0d0c08;
         }
-        .ml-search-input:focus {
-            background-color: #ffffff;
-            box-shadow: 0 0 0 3px rgba(4, 63, 119, 0.4);
-        }
-        .ml-search-btn {
+        .search-btn {
             background-color: #0d0c08;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-left: none;
-            color: #ffffff;
-            border-radius: 0 8px 8px 0;
-            padding: 0 20px;
-            transition: background-color 0.2s;
+            color: #f5ebd9;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            padding: 0 18px;
         }
-        .ml-search-btn:hover {
-            background-color: #1a1a1a;
+        .search-btn:hover {
+            background-color: #1c1a12;
+            color: #ffffff;
+        }
+        .sub-nav {
+            background-color: rgba(4, 63, 119, 0.85);
+            backdrop-filter: blur(8px);
+            font-size: 13px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .sub-nav a {
+            color: #f5ebd9;
+            text-decoration: none;
+            margin-right: 18px;
+            transition: color 0.2s;
+        }
+        .sub-nav a:hover {
             color: #ffffff;
         }
 
-        .glass-banner {
-            background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+        /* Estilo Glassmorphism */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.18);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border-radius: 14px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
-        .cat-card {
-            background: rgba(230, 216, 195, 0.15);
+        /* Banner Principal */
+        .promo-banner {
+            background: linear-gradient(135deg, rgba(4, 63, 119, 0.85), rgba(13, 12, 8, 0.85));
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
+            color: #f5ebd9;
+            border: 1px solid rgba(245, 235, 217, 0.25);
+            border-radius: 16px;
+            padding: 35px;
+            margin-top: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Categorias */
+        .cat-circle {
             width: 65px;
             height: 65px;
+            background: rgba(245, 235, 217, 0.12);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(245, 235, 217, 0.25);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            color: #f5ebd9;
-            font-size: 22px;
             transition: all 0.3s ease;
+            color: #f5ebd9;
+            font-size: 24px;
         }
-        .cat-card:hover {
-            transform: translateY(-5px) scale(1.05);
-            background: rgba(4, 63, 119, 0.8);
-            border-color: rgba(255, 255, 255, 0.4);
+        .cat-item:hover .cat-circle {
+            transform: translateY(-4px);
+            background-color: #043f77;
+            border-color: #f5ebd9;
             color: #ffffff;
-            box-shadow: 0 8px 25px rgba(4, 63, 119, 0.5);
+        }
+        .cat-item {
+            text-decoration: none;
+            color: #e6d8c3;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            display: block;
+        }
+        .cat-item:hover {
+            color: #ffffff;
         }
 
+        /* Cartões de Produtos em Glassmorphism */
         .card-produto {
             background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            overflow: hidden;
+            height: 100%;
+            color: #ffffff;
         }
         .card-produto:hover {
-            transform: translateY(-6px);
-            background: rgba(255, 255, 255, 0.14);
-            border-color: rgba(255, 255, 255, 0.35);
-            box-shadow: 0 12px 40px 0 rgba(4, 63, 119, 0.4);
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.13);
+            border-color: rgba(245, 235, 217, 0.4);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
         }
         .card-img-container {
-            height: 180px;
+            height: 190px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            background-color: #ffffff;
-            border-radius: 12px;
+            margin-bottom: 10px;
         }
         .card-img-container img {
-            max-height: 100%;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
         }
         .preco-destaque {
             font-size: 22px;
-            font-weight: 800;
-            color: #ffffff;
+            font-weight: 700;
+            color: #f5ebd9;
         }
         .frete-gratis {
-            color: #64b5f6;
-            font-size: 13px;
-            font-weight: 600;
+            color: #e6d8c3;
+            font-size: 12px;
+            font-weight: 700;
         }
         .btn-glass {
-            background: rgba(4, 63, 119, 0.8);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            background-color: #043f77;
             color: #ffffff;
-            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.2s;
         }
         .btn-glass:hover {
-            background: rgba(4, 63, 119, 1);
-            border-color: rgba(255, 255, 255, 0.5);
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(4, 63, 119, 0.6);
+            background-color: #065299;
+            color: #f5ebd9;
         }
-
         footer {
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(13, 12, 8, 0.9);
+            border-top: 1px solid rgba(245, 235, 217, 0.15);
             color: #e6d8c3;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Principal -->
-    <header class="ml-header sticky-top">
+    <!-- Cabeçalho Principal -->
+    <header class="ml-header">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-3">
-                    <a href="#" class="ml-logo">
+                <!-- Logótipo -->
+                <div class="col-md-3 col-6">
+                    <a href="{% url 'lista_produtos' %}" class="ml-logo">
                         <i class="fas fa-recycle text-warning"></i> SEGUNDA VIDA
                     </a>
                 </div>
-                <div class="col-md-6">
-                    <form class="d-flex" action="#" method="GET">
-                        <input class="form-control ml-search-input" type="search" placeholder="O que estás a procurar hoje?" aria-label="Search">
-                        <button class="btn ml-search-btn" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
+
+                <!-- Barra de Pesquisa -->
+                <div class="col-md-6 col-12 my-2 my-md-0 order-3 order-md-2">
+                    <form method="GET" action="{% url 'lista_produtos' %}" class="d-flex">
+                        <input type="text" name="q" class="form-control search-bar" placeholder="O que estás a procurar hoje?" value="{{ request.GET.q|default:'' }}">
+                        <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
-                <div class="col-md-3 text-end">
-                    <a href="#" class="btn btn-dark btn-sm me-2 fw-semibold" style="background-color: rgba(13, 12, 8, 0.8); border: 1px solid rgba(255,255,255,0.2);"><i class="fas fa-user-shield me-1"></i> Admin</a>
-                    <a href="#" class="text-white me-3"><i class="fas fa-shopping-cart fs-5"></i></a>
-                </div>
-            </div>
-            
-            <!-- Sub-menu de Navegação -->
-            <div class="row mt-3 pt-2 border-top border-white-50 d-none d-md-flex">
-                <div class="col-12">
-                    <a href="#" class="fw-bold text-decoration-none me-4 text-white"><i class="fas fa-bars me-1 text-warning"></i> Categorias</a>
-                    <a href="#" class="fw-bold text-decoration-none me-4 text-white-50">Ofertas da Semana</a>
-                    <a href="#" class="fw-bold text-decoration-none me-4 text-warning"><i class="fas fa-plus-circle me-1"></i> Vender Artigo</a>
-                    <a href="#" class="fw-bold text-decoration-none me-4 text-white-50">Como Funciona</a>
-                    <a href="#" class="fw-bold text-decoration-none me-4 text-white-50">Contacto</a>
+
+                <!-- Botões de Conta / Admin -->
+                <div class="col-md-3 col-6 text-end order-2 order-md-3">
+                    <a href="/admin" class="btn btn-dark btn-sm me-2 fw-semibold" style="background-color: rgba(13, 12, 8, 0.8); border: 1px solid rgba(255,255,255,0.2);"><i class="fas fa-user-shield me-1"></i> Admin</a>
+                    <a href="#" class="text-white fs-5"><i class="fas fa-shopping-cart"></i></a>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Banner Principal -->
-    <div class="container mt-4">
-        <div class="p-4 text-white rounded-4 glass-banner">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <h2 class="fw-bold">Dá uma Segunda Vida aos teus artigos!</h2>
-                    <p class="text-white-50 mb-0">Compra e vende produtos em segunda mão com rapidez e segurança na PAP Keven.</p>
-                </div>
-                <div class="col-md-4 text-end d-none d-md-block">
-                    <a href="#" class="btn btn-light fw-bold px-4 py-2 shadow-sm" style="color: #043f77; border-radius: 8px;">Anunciar Grátis</a>
-                </div>
+    <!-- Sub-menu de Navegação -->
+    <div class="sub-nav pt-2">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div>
+                <a href="{% url 'lista_produtos' %}"><i class="fas fa-bars me-1"></i> Categorias</a>
+                <a href="#produtos-destaque">Ofertas da Semana</a>
+                <a href="{% url 'criar_produto' %}" class="fw-bold text-warning"><i class="fas fa-plus-circle me-1"></i> Vender Artigo</a>
+                <a href="#">Como Funciona</a>
+                <a href="#">Contacto</a>
             </div>
         </div>
     </div>
 
-    <!-- Secção de Categorias -->
-    <div class="container mt-4">
-        <div class="row text-center">
-            <div class="col-3 col-md-2">
-                <div class="cat-card"><i class="fas fa-mobile-alt"></i></div>
-                <small class="fw-semibold text-white-50">Tecnologia</small>
+    <!-- Banner Promocional -->
+    <div class="container">
+        <div class="promo-banner d-flex flex-column flex-md-row align-items-center justify-content-between">
+            <div>
+                <h1 class="fw-bold mb-2 text-white">Dá uma Segunda Vida aos teus artigos!</h1>
+                <p class="mb-0 fs-5" style="color: #e6d8c3;">Compra e vende produtos em segunda mão com rapidez e segurança na PAP Keven.</p>
             </div>
-            <div class="col-3 col-md-2">
-                <div class="cat-card"><i class="fas fa-tshirt"></i></div>
-                <small class="fw-semibold text-white-50">Moda</small>
-            </div>
-            <div class="col-3 col-md-2">
-                <div class="cat-card"><i class="fas fa-couch"></i></div>
-                <small class="fw-semibold text-white-50">Casa</small>
-            </div>
-            <div class="col-3 col-md-2">
-                <div class="cat-card"><i class="fas fa-football-ball"></i></div>
-                <small class="fw-semibold text-white-50">Desporto</small>
-            </div>
-            <div class="col-3 col-md-2 d-none d-md-block">
-                <div class="cat-card"><i class="fas fa-gamepad"></i></div>
-                <small class="fw-semibold text-white-50">Gaming</small>
-            </div>
-            <div class="col-3 col-md-2 d-none d-md-block">
-                <div class="cat-card"><i class="fas fa-book"></i></div>
-                <small class="fw-semibold text-white-50">Livros</small>
+            <div class="mt-3 mt-md-0">
+                <a href="{% url 'criar_produto' %}" class="btn btn-light fw-bold px-4 py-2 shadow-sm" style="color: #043f77; border-radius: 8px;">Anunciar Grátis</a>
             </div>
         </div>
     </div>
 
-    <!-- Grelha de Produtos -->
-    <div class="container mt-4 mb-5">
-        <h4 class="mb-3 fw-bold text-white">Produtos em Destaque</h4>
+    <!-- Categorias Rápidas -->
+    <div class="container my-4">
+        <div class="row justify-content-center g-3">
+            <div class="col-4 col-md-2">
+                <a href="?categoria=Tecnologia" class="cat-item">
+                    <div class="cat-circle"><i class="fas fa-mobile-alt"></i></div>
+                    Tecnologia
+                </a>
+            </div>
+            <div class="col-4 col-md-2">
+                <a href="?categoria=Moda" class="cat-item">
+                    <div class="cat-circle"><i class="fas fa-tshirt"></i></div>
+                    Moda
+                </a>
+            </div>
+            <div class="col-4 col-md-2">
+                <a href="?categoria=Casa" class="cat-item">
+                    <div class="cat-circle"><i class="fas fa-couch"></i></div>
+                    Casa
+                </a>
+            </div>
+            <div class="col-4 col-md-2">
+                <a href="?categoria=Desporto" class="cat-item">
+                    <div class="cat-circle"><i class="fas fa-football-ball"></i></div>
+                    Desporto
+                </a>
+            </div>
+            <div class="col-4 col-md-2">
+                <a href="?categoria=Gaming" class="cat-item">
+                    <div class="cat-circle"><i class="fas fa-gamepad"></i></div>
+                    Gaming
+                </a>
+            </div>
+            <div class="col-4 col-md-2">
+                <a href="?categoria=Livros" class="cat-item">
+                    <div class="cat-circle"><i class="fas fa-book"></i></div>
+                    Livros
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Secção de Produtos em Destaque -->
+    <div id="produtos-destaque" class="container mt-4 mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="fw-bold text-white mb-0">Produtos em Destaque</h4>
+            <a href="{% url 'criar_produto' %}" class="btn btn-warning btn-sm fw-bold">
+                <i class="fas fa-plus me-1"></i> Novo Anúncio
+            </a>
+        </div>
+
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
             
-            <!-- Produto 1 -->
-            <div class="col">
-                <div class="card h-100 card-produto p-2">
-                    <div class="card-img-container">
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" class="w-100" alt="Ténis Nike">
-                    </div>
-                    <div class="card-body px-2 pb-0">
-                        <p class="frete-gratis mb-1"><i class="fas fa-map-marker-alt me-1"></i> Lisboa</p>
-                        <h5 class="card-title fs-6 text-white mb-1">Ténis Nike Red (Usado)</h5>
-                        <p class="text-white-50 mb-1" style="font-size: 12px;">
-                            <span class="badge bg-secondary">Como Novo</span> Qtd: 1
-                        </p>
-                        <p class="preco-destaque mb-2">49,99 €</p>
-                        <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
+            {% if produtos %}
+                <!-- Produtos Reais da Base de Dados -->
+                {% for produto in produtos %}
+                <div class="col">
+                    <div class="card h-100 card-produto p-2">
+                        <div class="card-img-container">
+                            {% if produto.imagem %}
+                                <img src="{{ produto.imagem.url }}" class="w-100" alt="{{ produto.titulo }}">
+                            {% else %}
+                                <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=400" class="w-100" alt="Sem imagem">
+                            {% endif %}
+                        </div>
+                        <div class="card-body px-2 pb-0 d-flex flex-column justify-content-between">
+                            <div>
+                                <p class="frete-gratis mb-1">
+                                    <i class="fas fa-map-marker-alt me-1"></i> {{ produto.localizacao }}
+                                </p>
+                                <h5 class="card-title fs-6 text-white mb-1">{{ produto.titulo }}</h5>
+                                <p class="text-white-50 mb-1" style="font-size: 12px;">
+                                    <span class="badge bg-secondary">{{ produto.estado_conservacao }}</span> Qtd: {{ produto.quantidade }}
+                                </p>
+                            </div>
+                            <div>
+                                <p class="preco-destaque mb-2">{{ produto.preco }} €</p>
+                                <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+                {% endfor %}
+            {% else %}
+                <!-- Produtos de Demonstração (aparecem enquanto não houver anúncios criados) -->
+                <div class="col">
+                    <div class="card h-100 card-produto p-2">
+                        <div class="card-img-container">
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" class="w-100" alt="Ténis">
+                        </div>
+                        <div class="card-body px-2 pb-0">
+                            <p class="frete-gratis mb-1"><i class="fas fa-map-marker-alt me-1"></i> Lisboa</p>
+                            <h5 class="card-title fs-6 text-white mb-1">Ténis Nike Red (Usado)</h5>
+                            <p class="text-white-50 mb-1" style="font-size: 12px;">
+                                <span class="badge bg-secondary">Como Novo</span> Qtd: 1
+                            </p>
+                            <p class="preco-destaque mb-2">49,99 €</p>
+                            <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- Produto 2 -->
-            <div class="col">
-                <div class="card h-100 card-produto p-2">
-                    <div class="card-img-container">
-                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400" class="w-100" alt="Headphones">
-                    </div>
-                    <div class="card-body px-2 pb-0">
-                        <p class="frete-gratis mb-1"><i class="fas fa-map-marker-alt me-1"></i> Porto</p>
-                        <h5 class="card-title fs-6 text-white mb-1">Auscultadores Bluetooth</h5>
-                        <p class="text-white-50 mb-1" style="font-size: 12px;">
-                            <span class="badge bg-secondary">Bom Estado</span> Qtd: 1
-                        </p>
-                        <p class="preco-destaque mb-2">29,90 €</p>
-                        <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
+                <div class="col">
+                    <div class="card h-100 card-produto p-2">
+                        <div class="card-img-container">
+                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400" class="w-100" alt="Fones">
+                        </div>
+                        <div class="card-body px-2 pb-0">
+                            <p class="frete-gratis mb-1"><i class="fas fa-map-marker-alt me-1"></i> Porto</p>
+                            <h5 class="card-title fs-6 text-white mb-1">Auscultadores Bluetooth</h5>
+                            <p class="text-white-50 mb-1" style="font-size: 12px;">
+                                <span class="badge bg-secondary">Bom Estado</span> Qtd: 1
+                            </p>
+                            <p class="preco-destaque mb-2">29,90 €</p>
+                            <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Produto 3 -->
-            <div class="col">
-                <div class="card h-100 card-produto p-2">
-                    <div class="card-img-container">
-                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400" class="w-100" alt="Relógio">
-                    </div>
-                    <div class="card-body px-2 pb-0">
-                        <p class="frete-gratis mb-1"><i class="fas fa-map-marker-alt me-1"></i> Coimbra</p>
-                        <h5 class="card-title fs-6 text-white mb-1">Smartwatch Elegante</h5>
-                        <p class="text-white-50 mb-1" style="font-size: 12px;">
-                            <span class="badge bg-secondary">Como Novo</span> Qtd: 1
-                        </p>
-                        <p class="preco-destaque mb-2">75,00 €</p>
-                        <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
+                <div class="col">
+                    <div class="card h-100 card-produto p-2">
+                        <div class="card-img-container">
+                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400" class="w-100" alt="Relógio">
+                        </div>
+                        <div class="card-body px-2 pb-0">
+                            <p class="frete-gratis mb-1"><i class="fas fa-map-marker-alt me-1"></i> Coimbra</p>
+                            <h5 class="card-title fs-6 text-white mb-1">Smartwatch Elegante</h5>
+                            <p class="text-white-50 mb-1" style="font-size: 12px;">
+                                <span class="badge bg-secondary">Como Novo</span> Qtd: 1
+                            </p>
+                            <p class="preco-destaque mb-2">75,00 €</p>
+                            <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Produto 4 -->
-            <div class="col">
-                <div class="card h-100 card-produto p-2">
-                    <div class="card-img-container">
-                        <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=400" class="w-100" alt="Comando DualSense PS5">
-                    </div>
-                    <div class="card-body px-2 pb-0">
-                        <p class="frete-gratis mb-1"><i class="fas fa-map-marker-alt me-1"></i> Braga</p>
-                        <h5 class="card-title fs-6 text-white mb-1">Comando DualSense PS5</h5>
-                        <p class="text-white-50 mb-1" style="font-size: 12px;">
-                            <span class="badge bg-secondary">Usado</span> Qtd: 1
-                        </p>
-                        <p class="preco-destaque mb-2">39,99 €</p>
-                        <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
+                <div class="col">
+                    <div class="card h-100 card-produto p-2">
+                        <div class="card-img-container">
+                            <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=400" class="w-100" alt="Comando DualSense PS5">
+                        </div>
+                        <div class="card-body px-2 pb-0">
+                            <p class="frete-gratis mb-1"><i class="fas fa-map-marker-alt me-1"></i> Braga</p>
+                            <h5 class="card-title fs-6 text-white mb-1">Comando DualSense PS5</h5>
+                            <p class="text-white-50 mb-1" style="font-size: 12px;">
+                                <span class="badge bg-secondary">Usado</span> Qtd: 1
+                            </p>
+                            <p class="preco-destaque mb-2">39,99 €</p>
+                            <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
 
         </div>
     </div>
@@ -320,7 +399,7 @@
     <!-- Rodapé -->
     <footer class="py-4 mt-5 text-center">
         <div class="container">
-            <p class="mb-1 fw-bold" style="color: #e6d8c3;">SEGUNDA VIDA — Marketplace de Segunda Mão</p>
+            <p class="mb-1 fw-bold" style="color: #f5ebd9;">SEGUNDA VIDA — Marketplace de Segunda Mão</p>
             <small class="text-white-50">Projeto de Aptidão Profissional (PAP) desenvolvido por Keven.</small>
         </div>
     </footer>
