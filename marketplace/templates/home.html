@@ -184,7 +184,6 @@
                 <div class="col-12">
                     <a href="#" class="fw-bold text-decoration-none me-4 text-white"><i class="fas fa-bars me-1 text-warning"></i> Categorias</a>
                     <a href="#" class="fw-bold text-decoration-none me-4 text-white-50">Ofertas da Semana</a>
-                    <!-- BOTÃO VENDER ARTIGO FUNCIONAL -->
                     <a href="{% url 'criar_produto' %}" class="fw-bold text-decoration-none me-4 text-warning"><i class="fas fa-plus-circle me-1"></i> Vender Artigo</a>
                     <a href="#" class="fw-bold text-decoration-none me-4 text-white-50">Como Funciona</a>
                     <a href="#" class="fw-bold text-decoration-none me-4 text-white-50">Contacto</a>
@@ -202,7 +201,6 @@
                     <p class="text-white-50 mb-0">Compra e vende produtos em segunda mão com rapidez e segurança na PAP Keven.</p>
                 </div>
                 <div class="col-md-4 text-end d-none d-md-block">
-                    <!-- BOTÃO ANUNCIAR GRÁTIS FUNCIONAL -->
                     <a href="{% url 'criar_produto' %}" class="btn btn-light fw-bold px-4 py-2 shadow-sm" style="color: #043f77; border-radius: 8px;">Anunciar Grátis</a>
                 </div>
             </div>
@@ -274,7 +272,7 @@
             {% empty %}
             <div class="col-12 text-center py-5">
                 <p class="text-white-50 fs-5 mb-3">Ainda não há produtos anunciados no marketplace.</p>
-                <a href="{% url 'criar_produto' %}" class="btn btn-warning fw-bold px-4 py-2">Publicar o Primeiros Artigo</a>
+                <a href="{% url 'criar_produto' %}" class="btn btn-warning fw-bold px-4 py-2">Publicar o Primeiro Artigo</a>
             </div>
             {% endfor %}
 

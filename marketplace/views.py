@@ -6,16 +6,16 @@ from django.contrib.auth import get_user_model
 # 1. Página Inicial / Catálogo
 def lista_produtos(request):
     produtos = Produto.objects.filter(status='disponivel').order_by('-data_criacao')
-    return render(request, 'marketplace/home.html', {'produtos': produtos})
+    return render(request, 'home.html', {'produtos': produtos})
 
-# 2. Criar Novo Anúncio (Sem exigir Login)
+# 2. Criar Novo Anúncio (Sem exigir Login + Upload de Imagens)
 def criar_produto(request):
     if request.method == 'POST':
-        form = ProdutoForm(request.POST)
+        form = ProdutoForm(request.POST, request.FILES)  # request.FILES adicionado para carregar imagens
         if form.is_valid():
             produto = form.save(commit=False)
             
-            # Pega o primeiro utilizador que existir ou associa um temporário
+            # Pega o primeiro utilizador que existir ou cria um temporário
             User = get_user_model()
             usuario_padrao = User.objects.first()
             if not usuario_padrao:
@@ -26,4 +26,4 @@ def criar_produto(request):
             return redirect('lista_produtos')
     else:
         form = ProdutoForm()
-    return render(request, 'marketplace/criar_produto.html', {'form': form})
+    return render(request, 'criar_produto.html', {'form': form})
