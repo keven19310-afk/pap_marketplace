@@ -25,12 +25,12 @@ def criar_produto(request):
             return redirect('lista_produtos')
     else:
         form = ProdutoForm()
-    return render(request, 'criar_produto.html', {'form': form})
+    return render(request, 'produto.html', {'form': form, 'modo': 'criar'})
 
 # 3. Ver Detalhes do Produto
 def detalhe_produto(request, id):
     produto = get_object_or_404(Produto, id=id)
-    return render(request, 'detalhe_produto.html', {'produto': produto})
+    return render(request, 'produto.html', {'produto': produto, 'modo': 'detalhe'})
 
 # 4. Editar Produto (Alterar foto, preço, título, etc.)
 def editar_produto(request, id):
@@ -42,7 +42,7 @@ def editar_produto(request, id):
             return redirect('detalhe_produto', id=produto.id)
     else:
         form = ProdutoForm(instance=produto)
-    return render(request, 'editar_produto.html', {'form': form, 'produto': produto})
+    return render(request, 'produto.html', {'form': form, 'produto': produto, 'modo': 'editar'})
 
 # 5. Apagar Produto
 def apagar_produto(request, id):

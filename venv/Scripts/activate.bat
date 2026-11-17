@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set "VIRTUAL_ENV=C:\pap_marketplace\venv"
+set "VIRTUAL_ENV=C:\Users\ddtan\OneDrive\Documentos\GitHub\pap_marketplace\venv"
 
 if not defined PROMPT set PROMPT=$P$G
 
