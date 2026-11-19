@@ -123,6 +123,17 @@
         .cat-item:hover {
             color: #ffffff;
         }
+        /* Categoria Ativa */
+        .cat-item.ativa .cat-circle {
+            background-color: #ffc107;
+            border-color: #ffc107;
+            color: #0d0c08;
+            transform: translateY(-4px);
+            box-shadow: 0 6px 18px rgba(255, 193, 7, 0.35);
+        }
+        .cat-item.ativa {
+            color: #ffc107;
+        }
 
         /* Cartões de Produtos em Glassmorphism */
         .card-produto {
@@ -204,10 +215,17 @@
                     </form>
                 </div>
 
-                <!-- Botões de Conta / Admin -->
+                <!-- Botões de Conta / Admin / Carrinho -->
                 <div class="col-md-3 col-6 text-end order-2 order-md-3">
-                    <a href="/admin" class="btn btn-dark btn-sm me-2 fw-semibold" style="background-color: rgba(13, 12, 8, 0.8); border: 1px solid rgba(255,255,255,0.2);"><i class="fas fa-user-shield me-1"></i> Admin</a>
-                    <a href="#" class="text-white fs-5"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="/admin" class="btn btn-dark btn-sm me-3 fw-semibold" style="background-color: rgba(13, 12, 8, 0.8); border: 1px solid rgba(255,255,255,0.2);"><i class="fas fa-user-shield me-1"></i> Admin</a>
+                    <button type="button" class="btn btn-link text-white fs-5 position-relative p-0 text-decoration-none" data-bs-toggle="modal" data-bs-target="#modalCarrinho">
+                        <i class="fas fa-shopping-cart"></i>
+                        {% if qtd_carrinho > 0 %}
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark" style="font-size: 11px;">
+                                {{ qtd_carrinho }}
+                            </span>
+                        {% endif %}
+                    </button>
                 </div>
             </div>
         </div>
@@ -217,7 +235,6 @@
     <div class="sub-nav pt-2">
         <div class="container d-flex justify-content-between align-items-center">
             <div>
-                <a href="{% url 'lista_produtos' %}"><i class="fas fa-bars me-1"></i> Categorias</a>
                 <a href="#produtos-destaque">Ofertas da Semana</a>
                 <a href="{% url 'criar_produto' %}" class="fw-bold text-warning"><i class="fas fa-plus-circle me-1"></i> Vender Artigo</a>
                 <a href="#">Como Funciona</a>
@@ -225,6 +242,18 @@
             </div>
         </div>
     </div>
+
+    <!-- Alerta de Compra Finalizada -->
+    {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show border-0 rounded-3 shadow" style="background: rgba(25, 135, 84, 0.9); color: #ffffff;" role="alert">
+                    <i class="fas fa-check-circle me-2"></i> {{ message }}
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 
     <!-- Banner Promocional -->
     <div class="container">
@@ -243,37 +272,37 @@
     <div class="container my-4">
         <div class="row justify-content-center g-3">
             <div class="col-4 col-md-2">
-                <a href="?categoria=Tecnologia" class="cat-item">
+                <a href="{% if categoria_selecionada == 'Tecnologia' %}{% url 'lista_produtos' %}{% else %}?categoria=Tecnologia#produtos-destaque{% endif %}" class="cat-item {% if categoria_selecionada == 'Tecnologia' %}ativa{% endif %}">
                     <div class="cat-circle"><i class="fas fa-mobile-alt"></i></div>
                     Tecnologia
                 </a>
             </div>
             <div class="col-4 col-md-2">
-                <a href="?categoria=Moda" class="cat-item">
+                <a href="{% if categoria_selecionada == 'Moda' %}{% url 'lista_produtos' %}{% else %}?categoria=Moda#produtos-destaque{% endif %}" class="cat-item {% if categoria_selecionada == 'Moda' %}ativa{% endif %}">
                     <div class="cat-circle"><i class="fas fa-tshirt"></i></div>
                     Moda
                 </a>
             </div>
             <div class="col-4 col-md-2">
-                <a href="?categoria=Casa" class="cat-item">
+                <a href="{% if categoria_selecionada == 'Casa' %}{% url 'lista_produtos' %}{% else %}?categoria=Casa#produtos-destaque{% endif %}" class="cat-item {% if categoria_selecionada == 'Casa' %}ativa{% endif %}">
                     <div class="cat-circle"><i class="fas fa-couch"></i></div>
                     Casa
                 </a>
             </div>
             <div class="col-4 col-md-2">
-                <a href="?categoria=Desporto" class="cat-item">
+                <a href="{% if categoria_selecionada == 'Desporto' %}{% url 'lista_produtos' %}{% else %}?categoria=Desporto#produtos-destaque{% endif %}" class="cat-item {% if categoria_selecionada == 'Desporto' %}ativa{% endif %}">
                     <div class="cat-circle"><i class="fas fa-football-ball"></i></div>
                     Desporto
                 </a>
             </div>
             <div class="col-4 col-md-2">
-                <a href="?categoria=Gaming" class="cat-item">
+                <a href="{% if categoria_selecionada == 'Gaming' %}{% url 'lista_produtos' %}{% else %}?categoria=Gaming#produtos-destaque{% endif %}" class="cat-item {% if categoria_selecionada == 'Gaming' %}ativa{% endif %}">
                     <div class="cat-circle"><i class="fas fa-gamepad"></i></div>
                     Gaming
                 </a>
             </div>
             <div class="col-4 col-md-2">
-                <a href="?categoria=Livros" class="cat-item">
+                <a href="{% if categoria_selecionada == 'Livros' %}{% url 'lista_produtos' %}{% else %}?categoria=Livros#produtos-destaque{% endif %}" class="cat-item {% if categoria_selecionada == 'Livros' %}ativa{% endif %}">
                     <div class="cat-circle"><i class="fas fa-book"></i></div>
                     Livros
                 </a>
@@ -283,8 +312,23 @@
 
     <!-- Secção de Produtos em Destaque -->
     <div id="produtos-destaque" class="container mt-4 mb-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="fw-bold text-white mb-0">Produtos em Destaque</h4>
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+            <div class="d-flex align-items-center gap-3">
+                <h4 class="fw-bold text-white mb-0">
+                    {% if categoria_selecionada %}
+                        Categoria: <span class="text-warning">{{ categoria_selecionada }}</span>
+                    {% elif termo_pesquisa %}
+                        Resultados para: <span class="text-warning">"{{ termo_pesquisa }}"</span>
+                    {% else %}
+                        Produtos em Destaque
+                    {% endif %}
+                </h4>
+                {% if categoria_selecionada or termo_pesquisa %}
+                    <a href="{% url 'lista_produtos' %}" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                        <i class="fas fa-times me-1"></i> Limpar Filtro
+                    </a>
+                {% endif %}
+            </div>
             <a href="{% url 'criar_produto' %}" class="btn btn-warning btn-sm fw-bold">
                 <i class="fas fa-plus me-1"></i> Novo Anúncio
             </a>
@@ -311,7 +355,7 @@
                                 </p>
                                 <h5 class="card-title fs-6 text-white mb-1">{{ produto.titulo }}</h5>
                                 <p class="text-white-50 mb-1" style="font-size: 12px;">
-                                    <span class="badge bg-secondary">{{ produto.estado_conservacao }}</span> Qtd: {{ produto.quantidade }}
+                                    <span class="badge bg-secondary">{{ produto.get_estado_conservacao_display }}</span> Qtd: {{ produto.quantidade }}
                                 </p>
                             </div>
                             <div>
@@ -322,8 +366,25 @@
                     </div>
                 </div>
                 {% endfor %}
+
+            {% elif categoria_selecionada or termo_pesquisa %}
+                <!-- Mensagem quando não há produtos na categoria/pesquisa selecionada -->
+                <div class="col-12">
+                    <div class="glass-panel p-5 text-center my-3">
+                        <i class="fas fa-search fa-3x text-warning mb-3 opacity-75"></i>
+                        <h5 class="fw-bold text-white mb-2">Nenhum artigo encontrado</h5>
+                        <p class="text-white-50 mb-3">
+                            Ainda não existem anúncios disponíveis
+                            {% if categoria_selecionada %}na categoria <strong>{{ categoria_selecionada }}</strong>{% endif %}
+                            {% if termo_pesquisa %}para <strong>"{{ termo_pesquisa }}"</strong>{% endif %}.
+                        </p>
+                        <a href="{% url 'lista_produtos' %}" class="btn btn-outline-light btn-sm rounded-pill px-4 me-2">Ver Todos os Produtos</a>
+                        <a href="{% url 'criar_produto' %}" class="btn btn-warning btn-sm fw-bold rounded-pill px-4">Publicar Primeiro Anúncio</a>
+                    </div>
+                </div>
+
             {% else %}
-                <!-- Produtos de Demonstração (aparecem enquanto não houver anúncios criados) -->
+                <!-- Produtos de Demonstração (aparecem apenas se a base de dados estiver vazia) -->
                 <div class="col">
                     <div class="card h-100 card-produto p-2">
                         <div class="card-img-container">
@@ -396,6 +457,63 @@
         </div>
     </div>
 
+    <!-- Modal do Carrinho de Compras (Dark Glass) -->
+    <div class="modal fade" id="modalCarrinho" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-white" style="background: rgba(20, 22, 28, 0.95); backdrop-filter: blur(18px); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 18px;">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title fw-bold"><i class="fas fa-shopping-cart text-warning me-2"></i>O Teu Carrinho ({{ qtd_carrinho }})</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    {% if itens_carrinho %}
+                        <div class="d-flex flex-column gap-3">
+                            {% for item in itens_carrinho %}
+                                <div class="d-flex align-items-center justify-content-between p-2 rounded-3" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
+                                    <div class="d-flex align-items-center gap-3">
+                                        {% if item.produto.imagem %}
+                                            <img src="{{ item.produto.imagem.url }}" alt="{{ item.produto.titulo }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;">
+                                        {% else %}
+                                            <div class="bg-secondary rounded-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;"><i class="fas fa-box"></i></div>
+                                        {% endif %}
+                                        <div>
+                                            <h6 class="mb-0 fw-bold text-white">{{ item.produto.titulo }}</h6>
+                                            <small class="text-white-50">Qtd: <strong class="text-white">{{ item.quantidade }}</strong> × {{ item.produto.preco }} €</small>
+                                            <div class="text-warning fw-bold small">Subtotal: {{ item.subtotal }} €</div>
+                                        </div>
+                                    </div>
+                                    <a href="{% url 'remover_carrinho' item.produto.id %}" class="btn btn-outline-danger btn-sm rounded-circle" title="Remover e devolver ao stock">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <hr class="border-secondary my-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-white-50">Total Estimado:</span>
+                            <h4 class="fw-bold text-warning mb-0">{{ total_carrinho }} €</h4>
+                        </div>
+                    {% else %}
+                        <div class="text-center py-4">
+                            <i class="fas fa-shopping-basket fa-3x text-white-50 mb-3"></i>
+                            <p class="text-white-50 mb-0">O teu carrinho ainda está vazio.</p>
+                        </div>
+                    {% endif %}
+                </div>
+                {% if itens_carrinho %}
+                    <div class="modal-footer border-secondary">
+                        <form method="POST" action="{% url 'finalizar_compra' %}" class="w-100">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-warning fw-bold w-100 py-2 rounded-3">
+                                <i class="fas fa-check me-1"></i> Finalizar Reserva
+                            </button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
     <!-- Rodapé -->
     <footer class="py-4 mt-5 text-center">
         <div class="container">
@@ -403,6 +521,9 @@
             <small class="text-white-50">Projeto de Aptidão Profissional (PAP) desenvolvido por Keven.</small>
         </div>
     </footer>
+
+    <!-- Bootstrap JS (necessário para abrir o modal do carrinho) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
