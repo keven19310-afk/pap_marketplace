@@ -19,24 +19,28 @@
         /* Barra Superior em Azul Navy #043f77 */
         .ml-header {
             background-color: #043f77;
-            padding: 12px 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            padding: 16px 0;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
         }
         .ml-logo {
             font-weight: 900;
-            font-size: 24px;
+            font-size: 27px;
             color: #f5ebd9;
             text-decoration: none;
             letter-spacing: -0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
         .ml-logo:hover {
-            color: #e6d8c3;
+            color: #ffffff;
         }
         .search-bar {
-            border-radius: 4px 0 0 4px;
+            border-radius: 8px 0 0 8px;
             border: none;
-            padding: 10px 15px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            padding: 12px 18px;
+            font-size: 15px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
             background-color: #ffffff;
             color: #0d0c08;
         }
@@ -44,28 +48,66 @@
             background-color: #0d0c08;
             color: #f5ebd9;
             border: none;
-            border-radius: 0 4px 4px 0;
-            padding: 0 18px;
+            border-radius: 0 8px 8px 0;
+            padding: 0 22px;
+            font-size: 16px;
+            transition: background-color 0.2s;
         }
         .search-btn:hover {
             background-color: #1c1a12;
             color: #ffffff;
         }
+        .btn-admin-header {
+            background-color: rgba(13, 12, 8, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            font-size: 15px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .btn-admin-header:hover {
+            background-color: #0d0c08;
+            border-color: #ffc107;
+            color: #ffc107;
+        }
+        /* Sub-barra de Navegação com letras maiores e mais legíveis */
         .sub-nav {
-            background-color: rgba(4, 63, 119, 0.85);
+            background-color: rgba(4, 63, 119, 0.88);
             backdrop-filter: blur(8px);
-            font-size: 13px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 15.5px;
+            padding: 10px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .sub-nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 26px;
         }
         .sub-nav a {
             color: #f5ebd9;
             text-decoration: none;
-            margin-right: 18px;
-            transition: color 0.2s;
+            font-weight: 500;
+            transition: all 0.2s;
+            padding: 4px 2px;
         }
         .sub-nav a:hover {
             color: #ffffff;
+            transform: translateY(-1px);
+        }
+        .sub-nav a.link-vender {
+            background-color: rgba(255, 193, 7, 0.15);
+            border: 1px solid rgba(255, 193, 7, 0.45);
+            color: #ffc107 !important;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+        .sub-nav a.link-vender:hover {
+            background-color: #ffc107;
+            color: #0d0c08 !important;
         }
 
         /* Estilo Glassmorphism */
@@ -115,7 +157,7 @@
         .cat-item {
             text-decoration: none;
             color: #e6d8c3;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             text-align: center;
             display: block;
@@ -216,12 +258,14 @@
                 </div>
 
                 <!-- Botões de Conta / Admin / Carrinho -->
-                <div class="col-md-3 col-6 text-end order-2 order-md-3">
-                    <a href="/admin" class="btn btn-dark btn-sm me-3 fw-semibold" style="background-color: rgba(13, 12, 8, 0.8); border: 1px solid rgba(255,255,255,0.2);"><i class="fas fa-user-shield me-1"></i> Admin</a>
-                    <button type="button" class="btn btn-link text-white fs-5 position-relative p-0 text-decoration-none" data-bs-toggle="modal" data-bs-target="#modalCarrinho">
+                <div class="col-md-3 col-6 text-end order-2 order-md-3 d-flex align-items-center justify-content-end gap-3">
+                    <a href="/admin" class="btn btn-admin-header fw-semibold">
+                        <i class="fas fa-user-shield me-1"></i> Admin
+                    </a>
+                    <button type="button" class="btn btn-link text-white fs-4 position-relative p-1 text-decoration-none" data-bs-toggle="modal" data-bs-target="#modalCarrinho" title="Ver Carrinho">
                         <i class="fas fa-shopping-cart"></i>
                         {% if qtd_carrinho > 0 %}
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark" style="font-size: 11px;">
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark" style="font-size: 12px;">
                                 {{ qtd_carrinho }}
                             </span>
                         {% endif %}
@@ -232,11 +276,11 @@
     </header>
 
     <!-- Sub-menu de Navegação -->
-    <div class="sub-nav pt-2">
+    <div class="sub-nav">
         <div class="container d-flex justify-content-between align-items-center">
-            <div>
-                <a href="#produtos-destaque">Ofertas da Semana</a>
-                <a href="{% url 'criar_produto' %}" class="fw-bold text-warning"><i class="fas fa-plus-circle me-1"></i> Vender Artigo</a>
+            <div class="sub-nav-links">
+                <a href="#produtos-destaque"><i class="fas fa-fire text-warning me-1"></i> Ofertas da Semana</a>
+                <a href="{% url 'criar_produto' %}" class="link-vender"><i class="fas fa-plus-circle me-1"></i> Vender Artigo</a>
                 <a href="#">Como Funciona</a>
                 <a href="#">Contacto</a>
             </div>
