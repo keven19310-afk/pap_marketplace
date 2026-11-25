@@ -16,7 +16,6 @@
             font-family: Arial, sans-serif;
             color: #ffffff;
         }
-        /* Barra Superior em Azul Navy #043f77 */
         .ml-header {
             background-color: #043f77;
             padding: 16px 0;
@@ -61,8 +60,8 @@
             background-color: rgba(13, 12, 8, 0.85);
             border: 1px solid rgba(255, 255, 255, 0.25);
             color: #ffffff;
-            font-size: 15px;
-            padding: 8px 16px;
+            font-size: 14.5px;
+            padding: 8px 14px;
             border-radius: 8px;
             transition: all 0.2s;
         }
@@ -71,7 +70,6 @@
             border-color: #ffc107;
             color: #ffc107;
         }
-        /* Sub-barra de Navegação com letras maiores e mais legíveis */
         .sub-nav {
             background-color: rgba(4, 63, 119, 0.88);
             backdrop-filter: blur(8px);
@@ -84,7 +82,7 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 26px;
+            gap: 24px;
         }
         .sub-nav a {
             color: #f5ebd9;
@@ -110,7 +108,6 @@
             color: #0d0c08 !important;
         }
 
-        /* Animação do foguinho das Ofertas da Semana */
         @keyframes chama-viva {
             0%, 100% {
                 transform: scale(1) rotate(-4deg) translateY(0);
@@ -139,7 +136,6 @@
             animation: chama-viva 1.4s infinite ease-in-out;
         }
 
-        /* Estilo Glassmorphism */
         .glass-panel {
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(12px);
@@ -149,7 +145,6 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
-        /* Banner Principal */
         .promo-banner {
             background: linear-gradient(135deg, rgba(4, 63, 119, 0.85), rgba(13, 12, 8, 0.85));
             backdrop-filter: blur(10px);
@@ -161,7 +156,6 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
-        /* Categorias */
         .cat-circle {
             width: 65px;
             height: 65px;
@@ -194,7 +188,6 @@
         .cat-item:hover {
             color: #ffffff;
         }
-        /* Categoria Ativa */
         .cat-item.ativa .cat-circle {
             background-color: #ffc107;
             border-color: #ffc107;
@@ -206,7 +199,6 @@
             color: #ffc107;
         }
 
-        /* Cartões de Produtos em Glassmorphism */
         .card-produto {
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(12px);
@@ -232,11 +224,23 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 10px;
+            position: relative;
         }
         .card-img-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+        .badge-troca-card {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(13, 12, 8, 0.85);
+            color: #ffc107;
+            border: 1px solid #ffc107;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 20px;
         }
         .preco-destaque {
             font-size: 22px;
@@ -257,6 +261,15 @@
         .btn-glass:hover {
             background-color: #065299;
             color: #f5ebd9;
+        }
+        .form-dark {
+            background-color: rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            color: #ffffff !important;
+        }
+        .form-dark option {
+            background-color: #16181f;
+            color: #ffffff;
         }
         footer {
             background-color: rgba(13, 12, 8, 0.9);
@@ -279,7 +292,7 @@
                 </div>
 
                 <!-- Barra de Pesquisa -->
-                <div class="col-md-6 col-12 my-2 my-md-0 order-3 order-md-2">
+                <div class="col-md-5 col-12 my-2 my-md-0 order-3 order-md-2">
                     <form method="GET" action="{% url 'lista_produtos' %}" class="d-flex">
                         <input type="text" name="q" class="form-control search-bar" placeholder="O que estás a procurar hoje?" value="{{ request.GET.q|default:'' }}">
                         <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
@@ -287,11 +300,25 @@
                 </div>
 
                 <!-- Botões de Conta / Admin / Carrinho -->
-                <div class="col-md-3 col-6 text-end order-2 order-md-3 d-flex align-items-center justify-content-end gap-3">
-                    <a href="/admin" class="btn btn-admin-header fw-semibold">
+                <div class="col-md-4 col-6 text-end order-2 order-md-3 d-flex align-items-center justify-content-end gap-2">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'meus_anuncios' %}" class="btn btn-admin-header fw-semibold" title="Os Meus Anúncios">
+                            <i class="fas fa-box-open text-warning me-1"></i> {{ user.username }}
+                        </a>
+                        <a href="{% url 'sair' %}" class="btn btn-outline-light btn-sm py-2 px-2" title="Terminar Sessão">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </a>
+                    {% else %}
+                        <button type="button" class="btn btn-admin-header fw-semibold" data-bs-toggle="modal" data-bs-target="#modalConta">
+                            <i class="fas fa-user me-1"></i> Entrar
+                        </button>
+                    {% endif %}
+
+                    <a href="/admin" class="btn btn-admin-header fw-semibold d-none d-lg-inline-block">
                         <i class="fas fa-user-shield me-1"></i> Admin
                     </a>
-                    <button type="button" class="btn btn-link text-white fs-4 position-relative p-1 text-decoration-none" data-bs-toggle="modal" data-bs-target="#modalCarrinho" title="Ver Carrinho">
+
+                    <button type="button" class="btn btn-link text-white fs-4 position-relative p-1 ms-1 text-decoration-none" data-bs-toggle="modal" data-bs-target="#modalCarrinho" title="Ver Carrinho">
                         <i class="fas fa-shopping-cart"></i>
                         {% if qtd_carrinho > 0 %}
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark" style="font-size: 12px;">
@@ -310,13 +337,16 @@
             <div class="sub-nav-links">
                 <a href="#produtos-destaque"><i class="fas fa-fire fogo-animado me-1"></i> Ofertas da Semana</a>
                 <a href="{% url 'criar_produto' %}" class="link-vender"><i class="fas fa-plus-circle me-1"></i> Vender Artigo</a>
-                <a href="#">Como Funciona</a>
-                <a href="#">Contacto</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'meus_anuncios' %}"><i class="fas fa-list-ul me-1"></i> Os Meus Anúncios</a>
+                {% endif %}
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalComoFunciona">Como Funciona</a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalContacto">Contacto</a>
             </div>
         </div>
     </div>
 
-    <!-- Alerta de Compra Finalizada -->
+    <!-- Alertas -->
     {% if messages %}
         <div class="container mt-3">
             {% for message in messages %}
@@ -329,6 +359,7 @@
     {% endif %}
 
     <!-- Banner Promocional -->
+    {% if not modo_meus_anuncios %}
     <div class="container">
         <div class="promo-banner d-flex flex-column flex-md-row align-items-center justify-content-between">
             <div>
@@ -382,13 +413,16 @@
             </div>
         </div>
     </div>
+    {% endif %}
 
-    <!-- Secção de Produtos em Destaque -->
+    <!-- Secção de Produtos em Destaque + Barra de Filtros -->
     <div id="produtos-destaque" class="container mt-4 mb-5">
         <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-            <div class="d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center gap-3 flex-wrap">
                 <h4 class="fw-bold text-white mb-0">
-                    {% if categoria_selecionada %}
+                    {% if modo_meus_anuncios %}
+                        <i class="fas fa-box-open text-warning me-2"></i>Os Meus Anúncios
+                    {% elif categoria_selecionada %}
                         Categoria: <span class="text-warning">{{ categoria_selecionada }}</span>
                     {% elif termo_pesquisa %}
                         Resultados para: <span class="text-warning">"{{ termo_pesquisa }}"</span>
@@ -396,25 +430,46 @@
                         Produtos em Destaque
                     {% endif %}
                 </h4>
-                {% if categoria_selecionada or termo_pesquisa %}
+                {% if categoria_selecionada or termo_pesquisa or so_troca == '1' or modo_meus_anuncios %}
                     <a href="{% url 'lista_produtos' %}" class="btn btn-outline-light btn-sm rounded-pill px-3">
-                        <i class="fas fa-times me-1"></i> Limpar Filtro
+                        <i class="fas fa-times me-1"></i> Ver Todos
                     </a>
                 {% endif %}
             </div>
-            <a href="{% url 'criar_produto' %}" class="btn btn-warning btn-sm fw-bold">
-                <i class="fas fa-plus me-1"></i> Novo Anúncio
-            </a>
+
+            <!-- Barra Rápida de Ordenação e Trocas -->
+            {% if not modo_meus_anuncios %}
+            <form method="GET" action="{% url 'lista_produtos' %}#produtos-destaque" class="d-flex align-items-center gap-2 flex-wrap">
+                {% if categoria_selecionada %}<input type="hidden" name="categoria" value="{{ categoria_selecionada }}">{% endif %}
+                {% if termo_pesquisa %}<input type="hidden" name="q" value="{{ termo_pesquisa }}">{% endif %}
+
+                <div class="form-check form-switch text-white me-2 mb-0">
+                    <input class="form-check-input" type="checkbox" name="troca" value="1" id="filtroTroca" onchange="this.form.submit()" {% if so_troca == '1' %}checked{% endif %}>
+                    <label class="form-check-label small fw-semibold" for="filtroTroca">Aceita Troca</label>
+                </div>
+
+                <select name="ordem" class="form-select form-select-sm form-dark" style="width: auto;" onchange="this.form.submit()">
+                    <option value="-data_criacao" {% if ordem_selecionada == '-data_criacao' %}selected{% endif %}>Mais Recentes</option>
+                    <option value="preco" {% if ordem_selecionada == 'preco' %}selected{% endif %}>Preço: Menor para Maior</option>
+                    <option value="-preco" {% if ordem_selecionada == '-preco' %}selected{% endif %}>Preço: Maior para Menor</option>
+                </select>
+
+                <a href="{% url 'criar_produto' %}" class="btn btn-warning btn-sm fw-bold">
+                    <i class="fas fa-plus me-1"></i> Novo Anúncio
+                </a>
+            </form>
+            {% endif %}
         </div>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-            
             {% if produtos %}
-                <!-- Produtos Reais da Base de Dados -->
                 {% for produto in produtos %}
                 <div class="col">
                     <div class="card h-100 card-produto p-2">
                         <div class="card-img-container">
+                            {% if produto.aceita_troca %}
+                                <span class="badge-troca-card"><i class="fas fa-exchange-alt me-1"></i>Troca</span>
+                            {% endif %}
                             {% if produto.imagem %}
                                 <img src="{{ produto.imagem.url }}" class="w-100" alt="{{ produto.titulo }}">
                             {% else %}
@@ -428,109 +483,166 @@
                                 </p>
                                 <h5 class="card-title fs-6 text-white mb-1">{{ produto.titulo }}</h5>
                                 <p class="text-white-50 mb-1" style="font-size: 12px;">
-                                    <span class="badge bg-secondary">{{ produto.get_estado_conservacao_display }}</span> Qtd: {{ produto.quantidade }}
+                                    <span class="badge bg-secondary">{{ produto.get_estado_conservacao_display }}</span> 
+                                    {% if produto.status == 'vendido' %}
+                                        <span class="badge bg-danger">Vendido</span>
+                                    {% else %}
+                                        Qtd: {{ produto.quantidade }}
+                                    {% endif %}
                                 </p>
                             </div>
                             <div>
                                 <p class="preco-destaque mb-2">{{ produto.preco }} €</p>
-                                <a href="{% url 'detalhe_produto' produto.id %}" class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</a>
+                                <!-- Botões Ver Detalhes + Adicionar ao Carrinho lado a lado -->
+                                <div class="d-flex gap-2 mb-2">
+                                    <a href="{% url 'detalhe_produto' produto.id %}" class="btn btn-sm btn-glass flex-grow-1 fw-bold">
+                                        Ver Detalhes
+                                    </a>
+                                    {% if produto.status == 'disponivel' and produto.quantidade > 0 %}
+                                        <a href="{% url 'adicionar_carrinho' produto.id %}" class="btn btn-sm btn-warning fw-bold px-3" title="Adicionar ao Carrinho">
+                                            <i class="fas fa-cart-plus"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
-
-            {% elif categoria_selecionada or termo_pesquisa %}
-                <!-- Mensagem quando não há produtos na categoria/pesquisa selecionada -->
+            {% else %}
                 <div class="col-12">
                     <div class="glass-panel p-5 text-center my-3">
                         <i class="fas fa-search fa-3x text-warning mb-3 opacity-75"></i>
                         <h5 class="fw-bold text-white mb-2">Nenhum artigo encontrado</h5>
-                        <p class="text-white-50 mb-3">
-                            Ainda não existem anúncios disponíveis
-                            {% if categoria_selecionada %}na categoria <strong>{{ categoria_selecionada }}</strong>{% endif %}
-                            {% if termo_pesquisa %}para <strong>"{{ termo_pesquisa }}"</strong>{% endif %}.
-                        </p>
+                        <p class="text-white-50 mb-3">Não existem anúncios disponíveis com os filtros atuais.</p>
                         <a href="{% url 'lista_produtos' %}" class="btn btn-outline-light btn-sm rounded-pill px-4 me-2">Ver Todos os Produtos</a>
-                        <a href="{% url 'criar_produto' %}" class="btn btn-warning btn-sm fw-bold rounded-pill px-4">Publicar Primeiro Anúncio</a>
-                    </div>
-                </div>
-
-            {% else %}
-                <!-- Produtos de Demonstração (aparecem apenas se a base de dados estiver vazia) -->
-                <div class="col">
-                    <div class="card h-100 card-produto p-2">
-                        <div class="card-img-container">
-                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" class="w-100" alt="Ténis">
-                        </div>
-                        <div class="card-body px-2 pb-0">
-                            <p class="frete-gratis mb-1"><i class="fas fa-map-marker-alt me-1"></i> Lisboa</p>
-                            <h5 class="card-title fs-6 text-white mb-1">Ténis Nike Red (Usado)</h5>
-                            <p class="text-white-50 mb-1" style="font-size: 12px;">
-                                <span class="badge bg-secondary">Como Novo</span> Qtd: 1
-                            </p>
-                            <p class="preco-destaque mb-2">49,99 €</p>
-                            <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card h-100 card-produto p-2">
-                        <div class="card-img-container">
-                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400" class="w-100" alt="Fones">
-                        </div>
-                        <div class="card-body px-2 pb-0">
-                            <p class="frete-gratis mb-1"><i class="fas fa-map-marker-alt me-1"></i> Porto</p>
-                            <h5 class="card-title fs-6 text-white mb-1">Auscultadores Bluetooth</h5>
-                            <p class="text-white-50 mb-1" style="font-size: 12px;">
-                                <span class="badge bg-secondary">Bom Estado</span> Qtd: 1
-                            </p>
-                            <p class="preco-destaque mb-2">29,90 €</p>
-                            <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card h-100 card-produto p-2">
-                        <div class="card-img-container">
-                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400" class="w-100" alt="Relógio">
-                        </div>
-                        <div class="card-body px-2 pb-0">
-                            <p class="frete-gratis mb-1"><i class="fas fa-map-marker-alt me-1"></i> Coimbra</p>
-                            <h5 class="card-title fs-6 text-white mb-1">Smartwatch Elegante</h5>
-                            <p class="text-white-50 mb-1" style="font-size: 12px;">
-                                <span class="badge bg-secondary">Como Novo</span> Qtd: 1
-                            </p>
-                            <p class="preco-destaque mb-2">75,00 €</p>
-                            <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card h-100 card-produto p-2">
-                        <div class="card-img-container">
-                            <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=400" class="w-100" alt="Comando DualSense PS5">
-                        </div>
-                        <div class="card-body px-2 pb-0">
-                            <p class="frete-gratis mb-1"><i class="fas fa-map-marker-alt me-1"></i> Braga</p>
-                            <h5 class="card-title fs-6 text-white mb-1">Comando DualSense PS5</h5>
-                            <p class="text-white-50 mb-1" style="font-size: 12px;">
-                                <span class="badge bg-secondary">Usado</span> Qtd: 1
-                            </p>
-                            <p class="preco-destaque mb-2">39,99 €</p>
-                            <button class="btn btn-sm btn-glass w-100 fw-bold mb-2">Ver Detalhes</button>
-                        </div>
+                        <a href="{% url 'criar_produto' %}" class="btn btn-warning btn-sm fw-bold rounded-pill px-4">Publicar Anúncio</a>
                     </div>
                 </div>
             {% endif %}
-
         </div>
     </div>
 
-    <!-- Modal do Carrinho de Compras (Dark Glass) -->
+    <!-- Modal 1: Entrar / Criar Conta -->
+    <div class="modal fade" id="modalConta" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-white" style="background: rgba(20, 22, 28, 0.96); backdrop-filter: blur(18px); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 18px;">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title fw-bold"><i class="fas fa-user-circle text-warning me-2"></i>A Tua Conta Segunda Vida</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-pills nav-fill mb-3" role="tablist">
+                        <li class="nav-item"><button class="nav-link active fw-bold" data-bs-toggle="tab" data-bs-target="#tabEntrar">Entrar</button></li>
+                        <li class="nav-item"><button class="nav-link fw-bold text-white" data-bs-toggle="tab" data-bs-target="#tabRegistar">Criar Conta</button></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="tabEntrar">
+                            <form method="POST" action="{% url 'entrar' %}">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label class="form-label small">Nome de Utilizador</label>
+                                    <input type="text" name="username" class="form-control form-dark" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small">Palavra-passe</label>
+                                    <input type="password" name="password" class="form-control form-dark" required>
+                                </div>
+                                <button type="submit" class="btn btn-warning fw-bold w-100 py-2">Entrar</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="tabRegistar">
+                            <form method="POST" action="{% url 'registar' %}">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label class="form-label small">Nome de Utilizador</label>
+                                    <input type="text" name="username" class="form-control form-dark" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small">Email</label>
+                                    <input type="email" name="email" class="form-control form-dark" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small">Palavra-passe</label>
+                                    <input type="password" name="password" class="form-control form-dark" required>
+                                </div>
+                                <button type="submit" class="btn btn-warning fw-bold w-100 py-2">Criar Conta Grátis</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Como Funciona -->
+    <div class="modal fade" id="modalComoFunciona" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-white" style="background: rgba(20, 22, 28, 0.96); backdrop-filter: blur(18px); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 18px;">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title fw-bold"><i class="fas fa-info-circle text-warning me-2"></i>Como Funciona o Segunda Vida</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex gap-3 mb-3">
+                        <span class="badge bg-warning text-dark fs-6 rounded-circle d-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">1</span>
+                        <div>
+                            <h6 class="fw-bold mb-1">Publica o teu artigo grátis</h6>
+                            <p class="small text-white-50 mb-0">Tira uma foto, define o preço e indica se aceitas trocas por outros produtos.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-3 mb-3">
+                        <span class="badge bg-warning text-dark fs-6 rounded-circle d-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">2</span>
+                        <div>
+                            <h6 class="fw-bold mb-1">Reserva ou propõe uma troca</h6>
+                            <p class="small text-white-50 mb-0">Os compradores podem reservar diretamente no carrinho ou enviar uma proposta de troca.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-3">
+                        <span class="badge bg-warning text-dark fs-6 rounded-circle d-flex align-items-center justify-content-center" style="width: 34px; height: 34px;">3</span>
+                        <div>
+                            <h6 class="fw-bold mb-1">Combina a entrega na tua cidade</h6>
+                            <p class="small text-white-50 mb-0">Promove a economia circular e dá uma segunda vida a artigos em bom estado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Contacto -->
+    <div class="modal fade" id="modalContacto" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-white" style="background: rgba(20, 22, 28, 0.96); backdrop-filter: blur(18px); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 18px;">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title fw-bold"><i class="fas fa-envelope text-warning me-2"></i>Fala Connosco</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form method="POST" action="{% url 'enviar_contacto' %}">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label small">O teu Nome</label>
+                            <input type="text" name="nome" class="form-control form-dark" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small">O teu Email</label>
+                            <input type="email" name="email" class="form-control form-dark" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small">Mensagem</label>
+                            <textarea name="mensagem" rows="3" class="form-control form-dark" required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-secondary">
+                        <button type="submit" class="btn btn-warning fw-bold w-100">Enviar Mensagem</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: Carrinho de Compras -->
     <div class="modal fade" id="modalCarrinho" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content text-white" style="background: rgba(20, 22, 28, 0.95); backdrop-filter: blur(18px); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 18px;">
@@ -555,7 +667,7 @@
                                             <div class="text-warning fw-bold small">Subtotal: {{ item.subtotal }} €</div>
                                         </div>
                                     </div>
-                                    <a href="{% url 'remover_carrinho' item.produto.id %}" class="btn btn-outline-danger btn-sm rounded-circle" title="Remover e devolver ao stock">
+                                    <a href="{% url 'remover_carrinho' item.produto.id %}" class="btn btn-outline-danger btn-sm rounded-circle" title="Remover">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </div>
@@ -595,8 +707,6 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS (necessário para abrir o modal do carrinho) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>
