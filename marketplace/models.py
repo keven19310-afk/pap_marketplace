@@ -87,3 +87,20 @@ class PedidoProcura(models.Model):
 
     def __str__(self):
         return self.titulo_procurado
+
+
+# 5. Mensagens de Contacto (Suporte / Fala Connosco)
+class MensagemContacto(models.Model):
+    nome = models.CharField(max_length=100, verbose_name="Nome")
+    email = models.EmailField(verbose_name="E-mail")
+    mensagem = models.TextField(verbose_name="Mensagem")
+    data_envio = models.DateTimeField(auto_now_add=True, verbose_name="Data de Envio")
+    respondida = models.BooleanField(default=False, verbose_name="Respondida?")
+
+    class Meta:
+        verbose_name = "Mensagem de Contacto"
+        verbose_name_plural = "Mensagens de Contacto"
+        ordering = ['-data_envio']
+
+    def __str__(self):
+        return f"{self.nome} ({self.email})"
